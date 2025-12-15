@@ -1,0 +1,60 @@
+================================================================================
+SOLUTION RAPIDE POUR L'ERREUR OAUTH "redirect_uri_mismatch"
+================================================================================
+
+ÉTAPE 1: Allez sur Google Cloud Console
+----------------------------------------
+https://console.cloud.google.com/apis/credentials
+
+ÉTAPE 2: Éditez votre OAuth Client ID
+--------------------------------------
+1. Trouvez votre Client ID OAuth dans la console
+2. Cliquez sur l'icône CRAYON pour éditer
+
+ÉTAPE 3: Ajoutez ces URIs EXACTEMENT
+-------------------------------------
+
+Dans "Origines JavaScript autorisées":
+    http://localhost:8080
+    http://localhost:3000
+    http://127.0.0.1:8080
+    http://127.0.0.1:3000
+
+Dans "URI de redirection autorisés":
+    http://localhost:8080
+    http://localhost:8080/
+    http://localhost:3000
+    http://localhost:3000/
+    http://127.0.0.1:8080
+    http://127.0.0.1:8080/
+    http://127.0.0.1:3000
+    http://127.0.0.1:3000/
+
+ÉTAPE 4: Sauvegardez
+--------------------
+Cliquez sur "Enregistrer" en bas de la page
+
+ÉTAPE 5: Attendez 5 minutes
+----------------------------
+Les changements prennent 5-10 minutes pour se propager
+
+ÉTAPE 6: Redémarrez avec un port fixe
+--------------------------------------
+    .\start_flutter_web_8080.bat
+
+ÉTAPE 7: Testez OAuth Google
+-----------------------------
+Essayez de vous connecter avec Google
+
+================================================================================
+
+SI ÇA NE MARCHE TOUJOURS PAS:
+1. Vérifiez que vous avez le BON projet dans Google Cloud Console
+2. Vérifiez que le Client ID est bien celui qui commence par 989504216135
+3. Attendez 10 minutes de plus
+4. Effacez les cookies du navigateur
+5. Essayez en navigation privée
+
+Pour plus de détails: fix_oauth_redirect_uri.md
+
+================================================================================

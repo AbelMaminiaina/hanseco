@@ -1,0 +1,65 @@
+# Flutter/Dart
+hanseco_app/.dart_tool/
+hanseco_app/.flutter-plugins
+hanseco_app/.flutter-plugins-dependencies
+hanseco_app/.packages
+hanseco_app/.pub-cache/
+hanseco_app/.pub/
+hanseco_app/build/
+hanseco_app/ios/Pods/
+hanseco_app/ios/.symlinks/
+hanseco_app/ios/Flutter/Flutter.framework
+hanseco_app/ios/Flutter/Flutter.podspec
+hanseco_app/*.g.dart
+hanseco_app/*.freezed.dart
+
+# Environment
+hanseco_app/.env
+backend/.env
+
+# Python/Django
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/*.so
+backend/.Python
+backend/venv/
+backend/env/
+backend/ENV/
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/wheels/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+backend/db.sqlite3
+backend/db.sqlite3-journal
+backend/media/
+backend/staticfiles/
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Database
+*.sqlite3
+*.db

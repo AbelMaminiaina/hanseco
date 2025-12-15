@@ -1,0 +1,42 @@
+# Django
+Django==5.0.1
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+django-filter==23.5
+
+# Database
+psycopg2-binary==2.9.10
+dj-database-url==2.1.0
+
+# Authentication
+djangorestframework-simplejwt==5.3.1
+django-allauth==0.57.0
+dj-rest-auth==5.0.2
+dj-rest-auth[with_social]==5.0.2
+django-oauth-toolkit==2.3.0
+social-auth-app-django==5.4.0
+google-auth==2.25.2
+google-auth-oauthlib==1.2.0
+
+# Environment
+python-decouple==3.8
+python-dotenv==1.0.0
+
+# Payment Integrations
+requests==2.31.0
+stripe==7.9.0
+paypalrestsdk==1.13.1
+
+# Utils
+Pillow==11.0.0
+celery==5.3.4
+redis==5.0.1
+
+# WSGI Server
+gunicorn==21.2.0
+whitenoise==6.6.0
+
+# Development
+black==23.12.1
+flake8==7.0.0
+pytest-django==4.7.0
