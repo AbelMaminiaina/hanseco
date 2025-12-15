@@ -1,0 +1,81 @@
+name: Deploy iOS
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Déclenche sur les tags version (ex: v1.0.0)
+  workflow_dispatch:  # Permet le déclenchement manuel
+
+jobs:
+  build-ios:
+    name: Build & Deploy iOS
+    runs-on: macos-latest  # Nécessite macOS pour build iOS
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.5'
+          channel: 'stable'
+
+      - name: Get dependencies
+        working-directory: hanseco_app
+        run: flutter pub get
+
+      - name: Create .env file
+        working-directory: hanseco_app
+        run: |
+          echo "API_BASE_URL=${{ secrets.API_BASE_URL }}" >> .env
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
+
+      - name: Install CocoaPods
+        working-directory: hanseco_app/ios
+        run: pod install
+
+      - name: Import certificates
+        uses: apple-actions/import-codesign-certs@v2
+        with:
+          p12-file-base64: ${{ secrets.IOS_CERTIFICATES_P12 }}
+          p12-password: ${{ secrets.IOS_CERTIFICATES_PASSWORD }}
+
+      - name: Download provisioning profiles
+        uses: apple-actions/download-provisioning-profiles@v1
+        with:
+          bundle-id: com.hanseco.app
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+
+      - name: Build iOS
+        working-directory: hanseco_app
+        run: flutter build ios --release --no-codesign
+
+      - name: Build IPA
+        working-directory: hanseco_app
+        run: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hanseco.ipa
+          path: hanseco_app/build/ios/ipa/hanseco_app.ipa
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: hanseco_app/build/ios/ipa/hanseco_app.ipa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to TestFlight
+        uses: apple-actions/upload-testflight-build@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          app-path: hanseco_app/build/ios/ipa/hanseco_app.ipa
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
