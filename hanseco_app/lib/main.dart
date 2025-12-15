@@ -10,12 +10,16 @@ import 'core/theme/app_theme.dart';
 import 'core/router/app_router.dart';
 import 'core/constants/app_constants.dart';
 import 'core/l10n/app_localizations.dart';
+import 'core/config/env_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Load environment variables
   await dotenv.load(fileName: ".env");
+
+  // Inject Google Client ID into DOM for Web
+  EnvConfig.injectGoogleClientIdToDOM();
 
   // Initialize Hive
   await Hive.initFlutter();

@@ -1,9 +1,9 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'token_manager.dart';
+import '../config/env_config.dart';
 
 class OAuthService {
   final TokenManager _tokenManager = TokenManager();
@@ -17,10 +17,10 @@ class OAuthService {
   // Lazy initialization for Google Sign In
   GoogleSignIn get googleSignIn {
     if (_googleSignIn == null) {
-      final clientId = dotenv.env['GOOGLE_CLIENT_ID'];
+      final clientId = EnvConfig.googleClientId;
       // Only set clientId if it's a valid one (not placeholder)
       _googleSignIn = GoogleSignIn(
-        clientId: (clientId != null && !clientId.contains('your_google'))
+        clientId: (clientId.isNotEmpty && !clientId.contains('YOUR_GOOGLE'))
             ? clientId
             : null,
         scopes: [
@@ -134,7 +134,7 @@ class OAuthService {
     required String authToken,
   }) async {
     try {
-      final baseUrl = dotenv.env['API_BASE_URL'] ?? 'http://localhost:8000/api';
+      final baseUrl = EnvConfig.apiBaseUrl;
       final response = await _dio.post(
         '$baseUrl/oauth/$provider/',
         data: {
@@ -182,7 +182,7 @@ class OAuthService {
         return false;
       }
 
-      final baseUrl = dotenv.env['API_BASE_URL'] ?? 'http://localhost:8000/api';
+      final baseUrl = EnvConfig.apiBaseUrl;
       final response = await _dio.post(
         '$baseUrl/oauth/token/refresh/',
         data: {

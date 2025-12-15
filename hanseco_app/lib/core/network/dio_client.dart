@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../constants/app_constants.dart';
+import '../config/env_config.dart';
 
 class DioClient {
   late final Dio _dio;
@@ -11,7 +11,7 @@ class DioClient {
   DioClient(this._storage) {
     _dio = Dio(
       BaseOptions(
-        baseUrl: dotenv.env['API_BASE_URL'] ?? 'http://localhost:8000/api',
+        baseUrl: EnvConfig.apiBaseUrl,
         connectTimeout: Duration(milliseconds: AppConstants.connectTimeout),
         receiveTimeout: Duration(milliseconds: AppConstants.receiveTimeout),
         headers: {
