@@ -13,6 +13,14 @@ hanseco_app/ios/Flutter/Flutter.podspec
 hanseco_app/*.g.dart
 hanseco_app/*.freezed.dart
 
+# Android Security - NEVER COMMIT THESE!
+hanseco_app/android/app/*.jks
+hanseco_app/android/app/*.keystore
+hanseco_app/android/key.properties
+hanseco_app/android/app/google-services.json
+hanseco_app/android/app/*.json
+keystore-base64.txt
+
 # Environment
 hanseco_app/.env
 backend/.env

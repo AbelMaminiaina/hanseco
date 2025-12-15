@@ -1,0 +1,10 @@
+# Signing keys - NEVER commit these!
+*.jks
+*.keystore
+key.properties
+
+# Google Services config (contains sensitive info)
+google-services.json
+
+# Build outputs
+/build

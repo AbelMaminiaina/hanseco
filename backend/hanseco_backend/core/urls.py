@@ -10,10 +10,9 @@ urlpatterns = [
     path('api/auth/', include('hanseco_backend.apps.auth.urls')),
     path('api/oauth/', include('hanseco_backend.apps.oauth.urls')),
     path('api/products/', include('hanseco_backend.apps.products.urls')),
-    # Temporarily commented out until URLs are created
-    # path('api/cart/', include('hanseco_backend.apps.cart.urls')),
-    # path('api/orders/', include('hanseco_backend.apps.orders.urls')),
-    # path('api/payments/', include('hanseco_backend.apps.payments.urls')),
+    path('api/', include('hanseco_backend.apps.cart.urls')),
+    path('api/', include('hanseco_backend.apps.orders.urls')),
+    path('api/payments/', include('hanseco_backend.apps.payments.urls')),
 ]
 
 if settings.DEBUG:

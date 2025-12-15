@@ -166,7 +166,7 @@ class _LoginPageWithOAuthState extends ConsumerState<LoginPageWithOAuth> {
                       controller: _emailController,
                       hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
-                      prefixIcon: Icons.email_outlined,
+                      prefixIcon: const Icon(Icons.email_outlined),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Veuillez entrer votre email';
@@ -184,7 +184,7 @@ class _LoginPageWithOAuthState extends ConsumerState<LoginPageWithOAuth> {
                       controller: _passwordController,
                       hintText: 'Mot de passe',
                       obscureText: _obscurePassword,
-                      prefixIcon: Icons.lock_outline,
+                      prefixIcon: const Icon(Icons.lock_outline),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _obscurePassword

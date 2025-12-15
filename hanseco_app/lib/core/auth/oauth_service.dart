@@ -1,6 +1,7 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart' show debugPrint;
 
 import 'token_manager.dart';
 import '../config/env_config.dart';
@@ -72,7 +73,7 @@ class OAuthService {
         authToken: authToken,
       );
     } catch (e) {
-      print('Google Sign In Error: $e');
+      debugPrint('Google Sign In Error: $e');
       rethrow;
     }
   }
@@ -114,7 +115,7 @@ class OAuthService {
         throw Exception('Facebook login failed: ${result.status}');
       }
     } catch (e) {
-      print('Facebook Sign In Error: $e');
+      debugPrint('Facebook Sign In Error: $e');
       rethrow;
     }
   }
@@ -204,7 +205,7 @@ class OAuthService {
         return false;
       }
     } catch (e) {
-      print('Token refresh error: $e');
+      debugPrint('Token refresh error: $e');
       return false;
     }
   }
@@ -217,14 +218,14 @@ class OAuthService {
     try {
       await signOutGoogle();
     } catch (e) {
-      print('Google sign out error: $e');
+      debugPrint('Google sign out error: $e');
     }
 
     // Sign out from Facebook
     try {
       await signOutFacebook();
     } catch (e) {
-      print('Facebook sign out error: $e');
+      debugPrint('Facebook sign out error: $e');
     }
 
     // Clear tokens
