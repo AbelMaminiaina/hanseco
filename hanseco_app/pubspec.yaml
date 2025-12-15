@@ -100,7 +100,6 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/animations/
-    - .env
 
   # Fonts
   # TODO: Download Poppins fonts from https://fonts.google.com/specimen/Poppins
