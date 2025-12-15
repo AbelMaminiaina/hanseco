@@ -66,7 +66,7 @@ jobs:
 
       # Option 1: Déploiement sur Railway
       - name: Deploy to Railway
-        if: ${{ secrets.RAILWAY_TOKEN != '' }}
+        if: ${{ vars.DEPLOY_TARGET == 'railway' }}
         working-directory: backend
         run: |
           npm install -g @railway/cli
@@ -76,13 +76,13 @@ jobs:
 
       # Option 2: Déploiement sur Render
       - name: Deploy to Render
-        if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
+        if: ${{ vars.DEPLOY_TARGET == 'render' }}
         run: |
           curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
 
       # Option 3: Déploiement sur Heroku
       - name: Deploy to Heroku
-        if: ${{ secrets.HEROKU_API_KEY != '' }}
+        if: ${{ vars.DEPLOY_TARGET == 'heroku' }}
         uses: akhileshns/heroku-deploy@v3.13.15
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
@@ -92,7 +92,7 @@ jobs:
 
       # Option 4: Déploiement sur un serveur VPS via SSH
       - name: Deploy to VPS
-        if: ${{ secrets.VPS_SSH_KEY != '' }}
+        if: ${{ vars.DEPLOY_TARGET == 'vps' }}
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
