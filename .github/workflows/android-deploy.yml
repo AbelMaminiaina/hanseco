@@ -124,7 +124,6 @@ jobs:
           ANDROID_HOME: /usr/local/lib/android/sdk
         run: |
           flutter build appbundle --release \
-            --no-daemon \
             --no-tree-shake-icons \
             --no-shrink \
             --verbose
