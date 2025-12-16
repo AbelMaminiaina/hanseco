@@ -112,17 +112,6 @@ jobs:
         working-directory: hanseco_app
         run: flutter build appbundle --release
 
-      - name: Build Android APK
-        working-directory: hanseco_app
-        run: flutter build apk --release
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release-apk
-          path: hanseco_app/build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 30
-
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
@@ -146,7 +135,7 @@ jobs:
         if: success()
         run: |
           echo "✅ Build and deployment successful!"
-          echo "📦 APK and AAB artifacts uploaded"
+          echo "📦 AAB artifact uploaded"
           echo "🚀 Deployed to Play Store track: ${{ github.event.inputs.track || 'internal' }}"
 
       - name: Notify deployment failure
