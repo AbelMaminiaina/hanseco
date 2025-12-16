@@ -82,7 +82,7 @@ class HomePage extends ConsumerWidget {
                     name: 'Produit ${index + 1}',
                     price: (100000 + index * 50000).toDouble(),
                     imageUrl: '',
-                    onTap: () => context.push('/product/${index}'),
+                    onTap: () => context.push('/product/$index'),
                   );
                 },
                 childCount: 10,

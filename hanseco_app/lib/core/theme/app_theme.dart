@@ -16,7 +16,6 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         error: AppColors.error,
-        background: AppColors.background,
         surface: AppColors.surface,
       ),
       appBarTheme: AppBarTheme(
@@ -165,7 +164,6 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         error: AppColors.error,
-        background: Color(0xFF121212),
         surface: Color(0xFF1E1E1E),
       ),
       // Similar configuration for dark theme...

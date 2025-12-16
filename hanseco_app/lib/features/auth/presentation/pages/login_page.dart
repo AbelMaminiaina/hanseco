@@ -72,7 +72,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Google OAuth non configuré. Consultez OAUTH_SETUP.md'),
             backgroundColor: Colors.orange,
           ),
@@ -105,7 +105,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Facebook OAuth non configuré. Consultez OAUTH_SETUP.md'),
             backgroundColor: Colors.orange,
           ),
