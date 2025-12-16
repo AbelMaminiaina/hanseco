@@ -64,6 +64,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-flutter-build-
 
+      - name: Cache Gradle transforms
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches/transforms-*
+            ~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-gradle-transforms-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-transforms-
+
+      - name: Cache build outputs
+        uses: actions/cache@v4
+        with:
+          path: |
+            hanseco_app/build/app/intermediates
+            hanseco_app/android/app/build
+          key: ${{ runner.os }}-build-outputs-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-outputs-
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
