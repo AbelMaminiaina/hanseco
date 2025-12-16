@@ -22,4 +22,12 @@ plugins {
     id "org.jetbrains.kotlin.android" version "2.0.0" apply false
 }
 
+buildCache {
+    local {
+        enabled = true
+        directory = new File(rootDir, 'build-cache')
+        removeUnusedEntriesAfterDays = 30
+    }
+}
+
 include ":app"

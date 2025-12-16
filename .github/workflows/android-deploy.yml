@@ -29,7 +29,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
 
     steps:
       - name: Checkout repository
@@ -49,6 +49,7 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
             ~/.android/build-cache
+            hanseco_app/android/build-cache
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
@@ -72,11 +73,9 @@ jobs:
         working-directory: hanseco_app
         run: flutter pub get
 
-      - name: Clean build cache
+      - name: Clean Flutter build cache
         working-directory: hanseco_app
-        run: |
-          flutter clean
-          rm -rf ~/.gradle/caches
+        run: flutter clean
 
       - name: Run Flutter analyze
         working-directory: hanseco_app
