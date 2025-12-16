@@ -10,7 +10,7 @@ jobs:
   build-android:
     name: Build & Deploy Android
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
 
     steps:
       - name: Checkout code
@@ -30,9 +30,20 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
             ~/.android/build-cache
+            hanseco_app/android/build-cache
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
+      - name: Cache Flutter build
+        uses: actions/cache@v4
+        with:
+          path: |
+            hanseco_app/.dart_tool
+            hanseco_app/build
+          key: ${{ runner.os }}-flutter-build-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-build-
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -49,12 +60,6 @@ jobs:
       - name: Get dependencies
         working-directory: hanseco_app
         run: flutter pub get
-
-      - name: Clean build cache
-        working-directory: hanseco_app
-        run: |
-          flutter clean
-          rm -rf ~/.gradle/caches
 
       - name: Create .env file
         working-directory: hanseco_app
@@ -86,7 +91,7 @@ jobs:
           flutter build appbundle --release \
             --no-tree-shake-icons \
             --no-shrink \
-            --verbose
+            --no-pub
 
       - name: Upload App Bundle artifact
         uses: actions/upload-artifact@v4

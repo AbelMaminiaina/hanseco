@@ -54,6 +54,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Cache Flutter build
+        uses: actions/cache@v4
+        with:
+          path: |
+            hanseco_app/.dart_tool
+            hanseco_app/build
+          key: ${{ runner.os }}-flutter-build-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-build-
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -72,10 +82,6 @@ jobs:
       - name: Get Flutter dependencies
         working-directory: hanseco_app
         run: flutter pub get
-
-      - name: Clean Flutter build cache
-        working-directory: hanseco_app
-        run: flutter clean
 
       - name: Run Flutter analyze
         working-directory: hanseco_app
@@ -125,7 +131,7 @@ jobs:
           flutter build appbundle --release \
             --no-tree-shake-icons \
             --no-shrink \
-            --verbose
+            --no-pub
 
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
