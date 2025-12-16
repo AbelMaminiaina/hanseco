@@ -15,6 +15,7 @@ import '../../features/profile/presentation/pages/orders_page.dart';
 part 'app_router.g.dart';
 
 @riverpod
+// ignore: deprecated_member_use_from_same_package
 GoRouter appRouter(AppRouterRef ref) {
   return GoRouter(
     initialLocation: '/splash',
