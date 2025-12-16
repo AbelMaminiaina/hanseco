@@ -101,7 +101,9 @@ jobs:
 
       - name: Get Flutter dependencies
         working-directory: hanseco_app
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs || true
 
       - name: Run Flutter analyze
         working-directory: hanseco_app
@@ -150,8 +152,7 @@ jobs:
         run: |
           flutter build appbundle --release \
             --no-tree-shake-icons \
-            --no-shrink \
-            --no-pub
+            --no-shrink
 
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
