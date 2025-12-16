@@ -55,7 +55,6 @@ jobs:
         run: |
           flutter clean
           rm -rf ~/.gradle/caches
-          cd android && ./gradlew clean && cd ..
 
       - name: Create .env file
         working-directory: hanseco_app

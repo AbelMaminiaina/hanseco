@@ -77,7 +77,6 @@ jobs:
         run: |
           flutter clean
           rm -rf ~/.gradle/caches
-          cd android && ./gradlew clean && cd ..
 
       - name: Run Flutter analyze
         working-directory: hanseco_app
